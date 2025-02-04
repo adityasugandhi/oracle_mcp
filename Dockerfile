@@ -1,5 +1,5 @@
-# Use the official Python image
-FROM python:3.10-slim
+# Use Python 3.10.11 specifically
+FROM python:3.10.11-slim
 
 # Set working directory
 WORKDIR /app
@@ -21,7 +21,9 @@ RUN apt-get update \
 COPY . .
 
 # Install Python dependencies
-RUN pip install -e ".[dev]"
+RUN pip install --upgrade pip \
+    && pip install mcp \
+    && pip install -e ".[dev]"
 
 # Expose port
 EXPOSE 8000

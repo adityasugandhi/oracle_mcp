@@ -19,20 +19,17 @@ setup(
         "Intended Audience :: Developers",
         "Topic :: Software Development :: Libraries :: Python Modules",
         "License :: OSI Approved :: MIT License",
-        "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.8",
-        "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Operating System :: OS Independent",
     ],
-    python_requires=">=3.8",
+    python_requires=">=3.10.11",  # Updated Python version requirement
     install_requires=[
         "httpx>=0.24.0",
         "httpx-sse>=0.3.0",
         "python-dotenv>=0.19.0",
         "cryptography>=3.4.7",
         "oracledb>=1.3.0",
-        "mcp",  # Just use the package name without version
+        "mcp",
         "asyncio>=3.4.3",
         "typing-extensions>=4.0.0",
     ],
