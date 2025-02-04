@@ -32,7 +32,7 @@ setup(
         "python-dotenv>=0.19.0",
         "cryptography>=3.4.7",
         "oracledb>=1.3.0",
-        "mcp-core>=0.1.0",  # You'll need to verify the correct package name and version
+        "mcp>=0.1.0",
         "asyncio>=3.4.3",
         "typing-extensions>=4.0.0",
     ],

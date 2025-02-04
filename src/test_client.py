@@ -13,6 +13,7 @@ load_dotenv()
 
 async def test_query():
     """Test a simple query execution"""
+    # Using a simple, safe test query
     query = "SELECT 1 as TEST_COLUMN FROM DUAL"
     
     message = {
@@ -23,14 +24,8 @@ async def test_query():
         }
     }
     
-    print(f"Sending message: {json.dumps(message)}")
+    logger.info(f"Sending test query...")
     print(json.dumps(message))
-    
-    # In a real implementation, you would:
-    # 1. Read the response
-    # 2. Parse the JSON
-    # 3. Handle any errors
-    # 4. Process the results
 
 async def main():
     """Main test function"""
