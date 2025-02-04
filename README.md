@@ -17,7 +17,7 @@ Oracle MCP is a Python-based server implementation for efficient communication b
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/oracle_mcp.git
+   git clone https://github.com/adityasugandhi/oracle_mcp.git
    cd oracle_mcp
    ```
 
@@ -142,8 +142,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact
 
-- Email: your.email@example.com
-- Issue Tracker: https://github.com/yourusername/oracle_mcp/issues
+- Maintainer: Aditya Sugandhi
+- Email: adityasugandhi@hotmail.com
+- Issue Tracker: https://github.com/adityasugandhi/oracle_mcp/issues
 
 ## Roadmap
 
@@ -155,16 +156,16 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/yourusername/oracle_mcp/tags).
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/adityasugandhi/oracle_mcp/tags).
 
 ## Security
 
-If you discover any security-related issues, please email security@example.com instead of using the issue tracker.
+If you discover any security-related issues, please email adityasugandhi@hotmail.com instead of using the issue tracker.
 
 ## Support
 
 For support, please:
 1. Check the [documentation](docs/)
-2. Search through [existing issues](https://github.com/yourusername/oracle_mcp/issues)
+2. Search through [existing issues](https://github.com/adityasugandhi/oracle_mcp/issues)
 3. Create a new issue if needed
-4. Join our [community Discord](https://discord.gg/your-server)# oracle_mcp
+4. Join our [community Discord](https://discord.gg/your-server)

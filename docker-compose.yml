@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  oracle-mcp:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - SERVER_HOST=0.0.0.0
+      - SERVER_PORT=8000
+      - DEBUG=false
+      - LOG_LEVEL=INFO
+    volumes:
+      - .:/app
+    restart: unless-stopped
+    networks:
+      - mcp-network
+
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - mcp-network
+
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - grafana-data:/var/lib/grafana
+    depends_on:
+      - prometheus
+    networks:
+      - mcp-network
+
+volumes:
+  grafana-data:
+
+networks:
+  mcp-network:
+    driver: bridge

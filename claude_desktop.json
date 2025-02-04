@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "oracle-query": {
+      "command": "/Users/stranzersweb/Projects/oracle_mcp/.venv/bin/python",
+      "args": ["/Users/stranzersweb/Projects/oracle_mcp/src/server.py"],
+      "cwd": "/Users/stranzersweb/Projects/oracle_mcp",
+      "env": {
+        "ORACLE_USER": "FSUREPORTS",
+        "ORACLE_PASSWORD": "reports",
+        "ORACLE_DSN": "oracle.facilities.fsu.edu:1521/?sid=FACP",
+        "PYTHONPATH": "/Users/stranzersweb/Projects/oracle_mcp"
+      }
+    }
+  }
+}
