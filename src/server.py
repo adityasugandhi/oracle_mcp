@@ -26,18 +26,30 @@ load_dotenv()
 # Configuration
 ORACLE_USER = os.getenv("ORACLE_USER")
 ORACLE_PASSWORD = os.getenv("ORACLE_PASSWORD")
-ORACLE_DSN = os.getenv("ORACLE_DSN")  # Format: host:port/?sid=sid_name
+ORACLE_HOST = os.getenv("ORACLE_HOST", "localhost")
+ORACLE_PORT = os.getenv("ORACLE_PORT", "1521")
+ORACLE_SERVICE = os.getenv("ORACLE_SERVICE")  # Can be SID or SERVICE_NAME
 
-if not all([ORACLE_USER, ORACLE_PASSWORD, ORACLE_DSN]):
+if not all([ORACLE_USER, ORACLE_PASSWORD, ORACLE_SERVICE]):
     raise ValueError("Oracle credentials not found in environment variables")
+
+# Create the connection string using the host, port, and service name
+# Example: "localhost:1521/ORCLPDB1" or "localhost:1521:ORCL" for SID
+def get_connection_string():
+    if '/' in ORACLE_SERVICE:  # If using service name
+        return f"{ORACLE_HOST}:{ORACLE_PORT}/{ORACLE_SERVICE}"
+    else:  # If using SID
+        return f"{ORACLE_HOST}:{ORACLE_PORT}:{ORACLE_SERVICE}"
 
 async def execute_query(query: str, params: dict = None) -> List[Dict]:
     """Execute a query and return results"""
     try:
+        # Create thin connection
         connection = oracledb.connect(
             user=ORACLE_USER,
             password=ORACLE_PASSWORD,
-            dsn=ORACLE_DSN
+            dsn=get_connection_string(),
+            config_dir=None,  # Disable tnsnames.ora lookup
         )
         
         cursor = connection.cursor()

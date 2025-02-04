@@ -33,7 +33,9 @@ jobs:
         # Use dummy values for testing - tests will skip Oracle-specific tests
         ORACLE_USER: dummy
         ORACLE_PASSWORD: dummy
-        ORACLE_DSN: dummy
+        ORACLE_HOST: localhost
+        ORACLE_PORT: 1521
+        ORACLE_SERVICE: ORCL
       run: |
         python -m pytest tests/ --cov=src --cov-report=xml -v
         
