@@ -32,7 +32,7 @@ setup(
         "python-dotenv>=0.19.0",
         "cryptography>=3.4.7",
         "oracledb>=1.3.0",
-        "mcp==1.2.1",  # Updated to specific version
+        "mcp",  # Just use the package name without version
         "asyncio>=3.4.3",
         "typing-extensions>=4.0.0",
     ],
