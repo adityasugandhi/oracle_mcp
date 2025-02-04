@@ -29,12 +29,13 @@ jobs:
         
     - name: Run tests
       env:
+        PYTHONPATH: ${PYTHONPATH}:${GITHUB_WORKSPACE}/src
         # Use dummy values for testing - tests will skip Oracle-specific tests
         ORACLE_USER: dummy
         ORACLE_PASSWORD: dummy
         ORACLE_DSN: dummy
       run: |
-        pytest tests/ --cov=src --cov-report=xml -v
+        python -m pytest tests/ --cov=src --cov-report=xml -v
         
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
