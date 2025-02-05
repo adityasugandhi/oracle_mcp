@@ -13,13 +13,15 @@ sys.path.insert(
 async def test_execute_query_basic():
     """Test that execute_query function exists and accepts correct parameters"""
     # Skip if no Oracle credentials
-    if not all([
-        os.getenv("ORACLE_USER"),
-        os.getenv("ORACLE_PASSWORD"),
-        os.getenv("ORACLE_SERVICE"),
-        os.getenv("ORACLE_HOST"),
-        os.getenv("ORACLE_PORT")
-    ]):
+    if not all(
+        [
+            os.getenv("ORACLE_USER"),
+            os.getenv("ORACLE_PASSWORD"),
+            os.getenv("ORACLE_SERVICE"),
+            os.getenv("ORACLE_HOST"),
+            os.getenv("ORACLE_PORT"),
+        ]
+    ):
         pytest.skip("Oracle credentials not configured")
 
     query = "SELECT 1 as TEST FROM DUAL"
@@ -36,13 +38,15 @@ async def test_execute_query_basic():
 @pytest.mark.asyncio
 async def test_execute_query_with_params():
     """Test query execution with parameters"""
-    if not all([
-        os.getenv("ORACLE_USER"),
-        os.getenv("ORACLE_PASSWORD"),
-        os.getenv("ORACLE_SERVICE"),
-        os.getenv("ORACLE_HOST"),
-        os.getenv("ORACLE_PORT")
-    ]):
+    if not all(
+        [
+            os.getenv("ORACLE_USER"),
+            os.getenv("ORACLE_PASSWORD"),
+            os.getenv("ORACLE_SERVICE"),
+            os.getenv("ORACLE_HOST"),
+            os.getenv("ORACLE_PORT"),
+        ]
+    ):
         pytest.skip("Oracle credentials not configured")
 
     query = "SELECT :value as TEST FROM DUAL"
