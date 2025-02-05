@@ -24,13 +24,13 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install mcp black
+        pip install mcp
         pip install -e ".[dev]"
         
     - name: Setup Oracle Client
       run: |
         sudo apt-get update
-        sudo apt-get install -y libaio1
+        sudo apt-get install -y libaio-dev
         sudo mkdir -p /opt/oracle
         cd /opt/oracle
         sudo wget https://download.oracle.com/otn_software/linux/instantclient/instantclient-basiclite-linuxx64.zip
@@ -73,7 +73,6 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install black isort flake8 mypy
-        pip install black
         
     - name: Check formatting
       run: |
