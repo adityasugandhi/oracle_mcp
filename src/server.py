@@ -56,11 +56,7 @@ async def execute_query(query: str, params: dict = None) -> List[Dict]:
             cursor.execute(query)
 
         # Get column names
-        columns = (
-            [col[0] for col in cursor.description]
-            if cursor.description
-            else []
-        )
+        columns = [col[0] for col in cursor.description] if cursor.description else []
 
         # Fetch results
         results = []
@@ -125,20 +121,10 @@ async def call_tool(
 
         try:
             results = await execute_query(query)
-            return [
-                TextContent(
-                    type="text", 
-                    text=json.dumps(results, indent=2)
-                )
-            ]
+            return [TextContent(type="text", text=json.dumps(results, indent=2))]
         except Exception as e:
             logger.error(f"Error executing query: {str(e)}")
-            return [
-                TextContent(
-                    type="text",
-                    text=f"Error executing query: {str(e)}"
-                )
-            ]
+            return [TextContent(type="text", text=f"Error executing query: {str(e)}")]
 
     raise ValueError(f"Unknown tool: {name}")
 
