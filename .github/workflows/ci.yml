@@ -30,11 +30,18 @@ jobs:
     - name: Setup Oracle Client
       run: |
         sudo apt-get update
-        sudo apt-get install -y libaio-dev
+        sudo apt-get install -y libaio-dev unzip wget
         sudo mkdir -p /opt/oracle
         cd /opt/oracle
-        sudo wget https://download.oracle.com/otn_software/linux/instantclient/instantclient-basiclite-linuxx64.zip
-        sudo unzip instantclient-basiclite-linuxx64.zip
+        ORACLE_VERSION="21_11"
+        if ! wget -q https://download.oracle.com/otn_software/linux/instantclient/${ORACLE_VERSION}/instantclient-basiclite-linux.x64-${ORACLE_VERSION}.zip; then
+          echo "Failed to download Oracle Instant Client"
+          exit 1
+        fi
+        if ! sudo unzip -q instantclient-basiclite-linux.x64-${ORACLE_VERSION}.zip; then
+          echo "Failed to unzip Oracle Instant Client"
+          exit 1
+        fi
         sudo sh -c "echo /opt/oracle/instantclient* > /etc/ld.so.conf.d/oracle-instantclient.conf"
         sudo ldconfig
         
@@ -48,8 +55,10 @@ jobs:
       env:
         PYTHONPATH: ${PYTHONPATH}:${GITHUB_WORKSPACE}/src
         ORACLE_USER: dummy
-        ORACLE_PASSWORD: dummy
-        ORACLE_DSN: ORCLCDB
+        ORACLE_PASSWORD: dummy123
+        ORACLE_SERVICE: ORCLCDB
+        ORACLE_HOST: localhost
+        ORACLE_PORT: 1521
         TNS_ADMIN: /opt/oracle/network/admin
       run: |
         python -m pytest tests/ --cov=src --cov-report=xml -v

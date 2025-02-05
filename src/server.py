@@ -1,13 +1,12 @@
 import json
 import logging
 import os
-from pathlib import Path
 from typing import Any, Dict, List, Sequence
 
 import oracledb
 from dotenv import load_dotenv
 from mcp.server import Server
-from mcp.types import EmbeddedResource, Resource, TextContent, Tool
+from mcp.types import EmbeddedResource, TextContent, Tool
 
 # Set up logging
 logging.basicConfig(level=logging.DEBUG)
@@ -47,7 +46,7 @@ async def execute_query(query: str, params: dict = None) -> List[Dict]:
             user=ORACLE_USER,
             password=ORACLE_PASSWORD,
             dsn=get_connection_string(),
-            config_dir=None,  # Disable tnsnames.ora lookup
+            config_dir=None,  # Disable lookup
         )
 
         cursor = connection.cursor()
@@ -90,7 +89,7 @@ async def list_tools() -> list[Tool]:
     return [
         Tool(
             name="execute_query",
-            description="Execute a SQL query on the Oracle database",
+            description="Execute SQL query on Oracle database",
             inputSchema={
                 "type": "object",
                 "properties": {

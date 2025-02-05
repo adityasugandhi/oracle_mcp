@@ -69,7 +69,7 @@ class DatabaseConnection:
     async def get_accessible_objects(self) -> List[Dict[str, Any]]:
         """Get list of accessible tables and views"""
         query = """
-        SELECT owner, object_name, object_type 
+        SELECT owner, object_name, object_type
         FROM all_objects 
         WHERE object_type IN ('TABLE', 'VIEW')
         AND owner NOT IN ('SYS', 'SYSTEM', 'AUDSYS', 'OUTLN', 'XDB')
@@ -89,7 +89,7 @@ class DatabaseConnection:
 
         privileges = await self.execute_query(
             """
-            SELECT privilege 
+            SELECT privilege
             FROM session_privs
             ORDER BY privilege
         """

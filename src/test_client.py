@@ -1,7 +1,7 @@
 import asyncio
 import json
 import logging
-import os
+
 
 from dotenv import load_dotenv
 
@@ -24,7 +24,7 @@ async def test_query():
         "arguments": {"query": query},
     }
 
-    logger.info(f"Sending test query...")
+    logger.info("Sending test query...")
     print(json.dumps(message))
 
 
