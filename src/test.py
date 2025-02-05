@@ -15,7 +15,7 @@ async def test_connection():
         results = await execute_query(
             """
             SELECT owner, object_name, object_type
-            FROM all_objects 
+            FROM all_objects
             WHERE object_type IN ('TABLE', 'VIEW')
             AND owner NOT IN ('SYS', 'SYSTEM', 'AUDSYS', 'OUTLN', 'XDB')
             ORDER BY owner, object_type, object_name
