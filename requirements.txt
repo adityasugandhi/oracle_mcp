@@ -14,7 +14,6 @@ mcp==1.2.1
 mcp-proxy==0.3.2
 mypy-extensions==1.0.0
 # Editable install with no version control (notion-mcp==0.1.0)
--e /Users/stranzersweb/Projects/notion-mcp
 packaging==24.2
 pathspec==0.12.1
 platformdirs==4.3.6
