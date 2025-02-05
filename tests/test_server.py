@@ -1,6 +1,8 @@
 import os
 import sys
+
 import pytest
+
 from server import execute_query
 
 # Add src to path
