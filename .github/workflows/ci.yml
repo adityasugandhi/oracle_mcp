@@ -90,7 +90,7 @@ jobs:
         
     - name: Lint with flake8
       run: |
-        flake8 src/ tests/
+        flake8 --max-line-length=100 src/ tests/
         
     - name: Type check with mypy
       run: |

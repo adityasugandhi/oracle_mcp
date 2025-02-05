@@ -70,7 +70,7 @@ class DatabaseConnection:
         """Get list of accessible tables and views"""
         query = """
         SELECT owner, object_name, object_type
-        FROM all_objects 
+        FROM all_objects
         WHERE object_type IN ('TABLE', 'VIEW')
         AND owner NOT IN ('SYS', 'SYSTEM', 'AUDSYS', 'OUTLN', 'XDB')
         ORDER BY owner, object_type, object_name

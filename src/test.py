@@ -14,7 +14,7 @@ async def test_connection():
         print("\nChecking accessible objects...")
         results = await execute_query(
             """
-            SELECT owner, object_name, object_type 
+            SELECT owner, object_name, object_type
             FROM all_objects 
             WHERE object_type IN ('TABLE', 'VIEW')
             AND owner NOT IN ('SYS', 'SYSTEM', 'AUDSYS', 'OUTLN', 'XDB')
@@ -66,7 +66,7 @@ async def test_connection():
             print("\nChecking system privileges...")
             privs = await execute_query(
                 """
-                SELECT privilege 
+                SELECT privilege
                 FROM session_privs
                 ORDER BY privilege
             """
