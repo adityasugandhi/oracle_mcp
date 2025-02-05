@@ -4,35 +4,36 @@ from datetime import datetime
 from typing import List, Dict, Any, Optional
 import logging
 
-logger = logging.getLogger('oracle_mcp')
+logger = logging.getLogger("oracle_mcp")
+
 
 class DatabaseConnection:
     def __init__(self):
         self.user = os.getenv("ORACLE_USER")
         self.password = os.getenv("ORACLE_PASSWORD")
         self.dsn = os.getenv("ORACLE_DSN")
-        
+
         if not all([self.user, self.password, self.dsn]):
             raise ValueError("Oracle credentials not found in environment variables")
 
-    async def execute_query(self, query: str, params: Optional[dict] = None) -> List[Dict[str, Any]]:
+    async def execute_query(
+        self, query: str, params: Optional[dict] = None
+    ) -> List[Dict[str, Any]]:
         """Execute a query and return results as a list of dictionaries"""
         try:
             connection = oracledb.connect(
-                user=self.user,
-                password=self.password,
-                dsn=self.dsn
+                user=self.user, password=self.password, dsn=self.dsn
             )
-            
+
             cursor = connection.cursor()
             if params:
                 cursor.execute(query, params)
             else:
                 cursor.execute(query)
-                
+
             # Get column names
             columns = [col[0] for col in cursor.description]
-            
+
             # Fetch results and convert to list of dictionaries
             results = []
             for row in cursor.fetchall():
@@ -42,16 +43,16 @@ class DatabaseConnection:
                     if isinstance(value, datetime):
                         result_dict[key] = value.isoformat()
                 results.append(result_dict)
-                
+
             return results
-            
+
         except oracledb.Error as e:
             logger.error(f"Oracle DB error: {str(e)}")
             raise
         finally:
-            if 'cursor' in locals():
+            if "cursor" in locals():
                 cursor.close()
-            if 'connection' in locals():
+            if "connection" in locals():
                 connection.close()
 
     async def get_table_info(self, table_name: str) -> List[Dict[str, Any]]:
@@ -77,19 +78,20 @@ class DatabaseConnection:
 
     async def get_user_privileges(self) -> Dict[str, List[Dict[str, Any]]]:
         """Get user roles and privileges"""
-        roles = await self.execute_query("""
+        roles = await self.execute_query(
+            """
             SELECT granted_role, admin_option, default_role
             FROM user_role_privs
             ORDER BY granted_role
-        """)
-        
-        privileges = await self.execute_query("""
+        """
+        )
+
+        privileges = await self.execute_query(
+            """
             SELECT privilege 
             FROM session_privs
             ORDER BY privilege
-        """)
-        
-        return {
-            "roles": roles,
-            "privileges": privileges
-        }
+        """
+        )
+
+        return {"roles": roles, "privileges": privileges}
